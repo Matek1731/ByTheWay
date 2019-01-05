@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  firebaseConfig: {
+    apiKey: 'AIzaSyC9iCKFtL7LUYdgR8e876Mh7etNg4uNcF0',
+    authDomain: 'bytheway-80062.firebaseapp.com',
+    databaseURL: 'https://bytheway-80062.firebaseio.com',
+    projectId: 'bytheway-80062',
+    storageBucket: 'bytheway-80062.appspot.com',
+    messagingSenderId: '96858170126'
+  },
+
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoibWFyeXNpZWsiLCJhIjoiY2pxamlkbzl5MG9tNTQ5bnk5NWs4OHM4dCJ9.4j9eJ1PTWdnbvdaziFbHOQ'
+  }
 };
 
 /*
