@@ -12,6 +12,6 @@
 
 <!-- pop-up miejsca -->
 <div *ngIf="selectedPlace">
-  <app-place-pop-up [selectedPlace]="selectedPlace"></app-place-pop-up>
+  <app-place-pop-up [selectedPlace]="selectedPlace" (closed)="onClosed($event)"></app-place-pop-up>
 </div>
 

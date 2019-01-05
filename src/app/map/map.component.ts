@@ -21,4 +21,8 @@ export class MapComponent implements OnInit {
     this.selectedPlace = place;
   }
 
+  onClosed($closed: boolean){
+    this.selectedPlace = null;
+  }
+
 }

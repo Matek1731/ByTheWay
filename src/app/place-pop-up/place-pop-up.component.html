@@ -1,6 +1,12 @@
-<p>
-  place-pop-up works!
-</p>
-
+<!-- 
 <h2>{{selectedPlace.name | uppercase}} Details</h2>
-<div><span>id: </span>{{ selectedPlace.id }} name: {{ selectedPlace.name }}</div>
+<div><span>id: </span>{{ selectedPlace.id }} name: {{ selectedPlace.name }}</div> -->
+
+<div #anchor></div>
+    <kendo-popup [anchor]="anchor" class="anchor k-button" *ngIf="this.show">
+      <button (click)="close()">Close</button>
+      <div class="content">
+        <h2>{{selectedPlace.name | uppercase}} Details</h2>
+        <div><span>id: </span>{{ selectedPlace.id }} name: {{ selectedPlace.name }}</div>
+      </div>
+    </kendo-popup>
