@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PLACES } from '../list-of-places';
 import { Place } from '../place';
+import * as mapboxgl from 'mapbox-gl';
+import { MapService } from '../services/map.service';
+import { GeoJson, FeatureCollection } from '../map';
 
 @Component({
   selector: 'app-map',
@@ -55,7 +58,7 @@ buildMap() {
     const coordinates = [event.lngLat.lng, event.lngLat.lat];
   });
 
-  this.map.on('load', (event) =>{
+  this.map.on('load', (event) => {
 
     this.map.addSource('firebase', {
       type: 'geojson',
@@ -102,7 +105,7 @@ flyTo(data: GeoJson) {
     this.selectedPlace = place;
   }
 
-  onClosed($closed: boolean){
+  onClosed($closed: boolean) {
     this.selectedPlace = null;
   }
 

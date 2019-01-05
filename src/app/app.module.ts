@@ -55,6 +55,5 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }
