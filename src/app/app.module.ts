@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
+import { PlaceComponent } from './place/place.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     SearchBarComponent,
-    MainScreenComponent
+    MainScreenComponent,
+    PlaceComponent
   ],
   imports: [
     BrowserModule,
