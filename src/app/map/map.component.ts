@@ -3,7 +3,7 @@ import { PLACES } from '../list-of-places';
 import { Place } from '../place';
 import * as mapboxgl from 'mapbox-gl';
 import { MapService } from '../services/map.service';
-import { GeoJson, FeatureCollection } from '../map';
+import { GeoJson, FeatureCollection } from './map';
 
 @Component({
   selector: 'app-map',
@@ -12,8 +12,8 @@ import { GeoJson, FeatureCollection } from '../map';
 })
 export class MapComponent implements OnInit {
 
-  places = PLACES;  //nasza wspaniala baza danych z pliku list-of-places XD
-  selectedPlace: Place; //wybrane miejsce, dla ktorego bedzie wyswietlal sie pop-up
+  places = PLACES;  // nasza wspaniala baza danych z pliku list-of-places XD
+  selectedPlace: Place; // wybrane miejsce, dla ktorego bedzie wyswietlal sie pop-up
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/outdoors-v9';
@@ -23,13 +23,15 @@ export class MapComponent implements OnInit {
 
   source: any;
 
-  constructor() { }
+  constructor(private mapservice: MapService) {
+  }
 
   ngOnInit() {
-    this.initializeMap();
+   this.initializeMap();
   }
 
   private initializeMap() {
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
@@ -40,9 +42,9 @@ export class MapComponent implements OnInit {
       });
     }
 
-  this.buildMap();
+   this.buildMap();
 
-}
+  }
 
 buildMap() {
   this.map = new mapboxgl.Map({
@@ -108,5 +110,4 @@ flyTo(data: GeoJson) {
   onClosed($closed: boolean) {
     this.selectedPlace = null;
   }
-
 }
