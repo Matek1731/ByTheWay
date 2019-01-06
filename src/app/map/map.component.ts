@@ -22,11 +22,13 @@ export class MapComponent implements OnInit {
   message = 'Hello World';
 
   source: any;
+  markers: any;
 
   constructor(private mapservice: MapService) {
   }
 
   ngOnInit() {
+   this.markers = this.mapservice.getMarkers();
    this.initializeMap();
   }
 
@@ -55,9 +57,12 @@ buildMap() {
   });
 
   this.map.addControl(new mapboxgl.NavigationControl());
+  this.map.addControl(new mapboxgl.FullscreenControl());
 
   this.map.on('click', (event) => {
     const coordinates = [event.lngLat.lng, event.lngLat.lat];
+    const newMarker = new GeoJson(coordinates, { message: this.message });
+    this.mapservice.createMarker(newMarker);
   });
 
   this.map.on('load', (event) => {
@@ -70,7 +75,12 @@ buildMap() {
       }
     });
 
-    this.source = this.map.getSource('firebase')
+    this.source = this.map.getSource('firebase');
+
+    this.markers.subscribe(markers => {
+      let data = new FeatureCollection(markers);
+      this.source.setData(data);
+    });
 
     this.map.addLayer({
       id: 'firebase',
@@ -94,6 +104,10 @@ buildMap() {
 
   });
 
+}
+
+removeMarker(marker) {
+  this.mapservice.removeMarker(marker.$key);
 }
 
 
