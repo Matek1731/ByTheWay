@@ -72,13 +72,55 @@ buildMap() {
   
 
   this.map.addControl(new mapboxgl.NavigationControl());
-  this.map.addControl(this.draw);
+  this.map.addControl(this.draw); 
   this.map.on('load', function() {
+      
+
+
+
+
+
+
+    
       console.log("KURŁA tej");
-      console.log(this._controls[3]);
+      console.log(this);
       console.log(PLACES)
       for (let place of PLACES) {
         console.log(place);
+this._controls[3].add({
+          type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [place.lng, place.lat]
+            },
+            properties: {
+              icon: {
+                iconUrl: '/mapbox.js/assets/images/astronaut1.png',
+                iconSize: [50, 50], // size of the icon
+                iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
+                popupAnchor: [0, -25], // point from which the popup should open relative to the iconAnchor
+                className: 'dot'
+              }
+            }
+          },
+          // {
+          //   type: 'Feature',
+          //   geometry: {
+          //     type: 'Point',
+          //     coordinates: [5, 5]
+          //   },
+          //   properties: {
+          //     icon: {
+          //       iconUrl: '/mapbox.js/assets/images/astronaut2.png',
+          //       iconSize: [50, 50], // size of the icon
+          //       iconAnchor: [25, 25], // point of the icon which will correspond to marker's location
+          //       popupAnchor: [0, -25], // point from which the popup should open relative to the iconAnchor
+          //       className: 'dot'
+          //     }
+          //   }
+          // }
+        );
+
         this._controls[3].add({
         
           "type": "Feature",
