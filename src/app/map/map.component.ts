@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PLACES } from '../list-of-places';
 import { Place } from '../place';
 import * as mapboxgl from 'mapbox-gl';
+import * as MapboxDraw from 'mapbox-gl-draw';
 import { MapService } from '../services/map.service';
 import { GeoJson, FeatureCollection } from './map';
 
@@ -23,17 +24,20 @@ export class MapComponent implements OnInit {
 
   source: any;
   markers: any;
+  
 
   constructor(private mapservice: MapService) {
   }
 
+  
+  static t;
   ngOnInit() {
-   this.markers = this.mapservice.getMarkers();
+  //  this.markers = this.mapservice.getMarkers();
    this.initializeMap();
   }
 
   private initializeMap() {
-
+    console.log("initializing map kurła");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
@@ -48,7 +52,16 @@ export class MapComponent implements OnInit {
 
   }
 
+  draw = new MapboxDraw({
+    displayControlsDefault: false,
+    controls: {
+        polygon: true,
+        trash: true
+    }
+});
+
 buildMap() {
+  console.log("building map kurła");
   this.map = new mapboxgl.Map({
     container: 'map',
     style: this.style,
@@ -56,31 +69,46 @@ buildMap() {
     center: [this.lng, this.lat]
   });
 
+  
+
   this.map.addControl(new mapboxgl.NavigationControl());
-  this.map.addControl(new mapboxgl.FullscreenControl());
+  this.map.addControl(this.draw);
+  this.map.on('load', function() {
+      console.log("KURŁA tej");
+      console.log(this._controls[3]);
+      this._controls[3].add({
+        
+          "type": "Feature",
+          "properties": {
+            "name": "Bermuda Triangle",
+            "area": 1150180
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [-64.73, 32.31],
+                [-80.19, 25.76],
+                [-66.09, 18.43],
+                [-64.73, 32.31]
+              ]
+            ]
+          }
+        }
+      );
+  });
+  // this.map.addControl(new mapboxgl.FullscreenControl());
 
   this.map.on('click', (event) => {
     const coordinates = [event.lngLat.lng, event.lngLat.lat];
-    const newMarker = new GeoJson(coordinates, { message: this.message });
-    this.mapservice.createMarker(newMarker);
+    console.log("clicked kurła " , coordinates)
+    // const newMarker = new GeoJson(coordinates, { message: this.message });
+    // this.mapservice.createMarker(newMarker);
   });
 
   this.map.on('load', (event) => {
 
-    this.map.addSource('firebase', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: []
-      }
-    });
-
-    this.source = this.map.getSource('firebase');
-
-    this.markers.subscribe(markers => {
-      let data = new FeatureCollection(markers);
-      this.source.setData(data);
-    });
+  
 
     this.map.addLayer({
       id: 'firebase',

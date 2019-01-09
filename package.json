@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.7.2",
     "mapbox-gl": "^0.52.0",
+    "mapbox-gl-draw": "^0.16.0",
     "ng2-opd-popup": "^1.1.21",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.0.0",
