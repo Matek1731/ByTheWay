@@ -76,7 +76,10 @@ buildMap() {
   this.map.on('load', function() {
       console.log("KURŁA tej");
       console.log(this._controls[3]);
-      this._controls[3].add({
+      console.log(PLACES)
+      for (let place of PLACES) {
+        console.log(place);
+        this._controls[3].add({
         
           "type": "Feature",
           "properties": {
@@ -89,13 +92,14 @@ buildMap() {
               [
                 [-64.73, 32.31],
                 [-80.19, 25.76],
-                [-66.09, 18.43],
+                [place.lng, place.lat],
                 [-64.73, 32.31]
               ]
             ]
           }
         }
       );
+    }
   });
   // this.map.addControl(new mapboxgl.FullscreenControl());
 
