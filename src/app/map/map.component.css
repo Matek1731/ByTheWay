@@ -49,4 +49,12 @@
 
   .mapbox-logo{
     display: none !important;
-}
+ }
+
+ /* .map {
+    width: 100px;
+    height: 100px;
+  }*/
+
+
+  #map { position:absolute; top:0; bottom:0; left:0; width:100%; }
