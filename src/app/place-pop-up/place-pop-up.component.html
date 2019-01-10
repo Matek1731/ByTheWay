@@ -2,11 +2,13 @@
 <h2>{{selectedPlace.name | uppercase}} Details</h2>
 <div><span>id: </span>{{ selectedPlace.id }} name: {{ selectedPlace.name }}</div> -->
 
+
 <div #anchor></div>
-    <kendo-popup [anchor]="anchor" class="anchor k-button" *ngIf="this.show">
-      <button (click)="close()">Close</button>
+    <kendo-popup class = "popup" [anchor]="anchor" class="anchor" *ngIf="this.show">
+      <button class = "close_button" (click)="close()">Close</button>
       <div class="content">
-        <h2>{{selectedPlace.name | uppercase}} Details</h2>
-        <div><span>id: </span>{{ selectedPlace.id }} name: {{ selectedPlace.name }}</div>
+        <h2>{{selectedPlace.name | uppercase}}</h2>
+        <div class= "description">{{ selectedPlace.description }}</div>
       </div>
+      <button class = "goto_button" (click)="goto()">Go to</button>
     </kendo-popup>

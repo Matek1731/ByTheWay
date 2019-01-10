@@ -15,22 +15,14 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { PlaceComponent } from './place/place.component';
 
 
 
-// const appRoutes: Routes = [,
-//   { path: 'place/:id',      component: PlaceComponent },
-//   {
-//     path: 'heroes',
-//     component: HeroListComponent,
-//     data: { title: 'Heroes List' }
-//   },
-//   { path: '',
-//     redirectTo: '/heroes',
-//     pathMatch: 'full'
-//   },
-//   { path: '**', component: PageNotFoundComponent }
-// ];
+const appRoutes: Routes = [
+  { path: '', component: MainScreenComponent  },
+  { path: 'place/:id', component: PlaceComponent },
+];
 
 
 
@@ -40,14 +32,14 @@ import { environment } from '../environments/environment';
     MapComponent,
     SearchBarComponent,
     MainScreenComponent,
+    PlaceComponent,
     PlacePopUpComponent],
   entryComponents: [],
   bootstrap: [AppComponent],
   imports: [
-    // RouterModule.forRoot(
-    //   appRoutes,
-    //   { enableTracing: true } // <-- debugging purposes only
-    // ),
+    RouterModule.forRoot(
+      appRoutes,
+    ),
     NgbModule,
     BrowserModule,
     AppRoutingModule,

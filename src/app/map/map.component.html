@@ -1,12 +1,12 @@
 <!-- lista miejsc - na razie w formie takiej, potem to trzeba na mapie poukłądać jakoś zgodnie ze współrzędnymi -->
 
-<div class="places">
+<!-- <div class="places">
   <div *ngFor="let place of places"
-  [class.selected]="place === selectedPlace"
-  (click)="onSelect(place)">
-    <span class="badge">{{place.id}}</span> {{place.name}}
-</div>
-</div>
+    [class.selected]="place === selectedPlace"
+    (click)="onSelect(place)">
+      <span class="badge">{{place.id}}</span> {{place.name}}
+  </div>
+</div> -->
 
 <!-- pop-up miejsca -->
 <div *ngIf="selectedPlace">
@@ -14,9 +14,5 @@
 </div>
 
 <!-- <input type="text" [(ngModel)]="message" placeholder="your message..."> -->
-
-<div *ngFor="let place of places">
-  <div >{{ place.name }} KURŁA</div>
-</div>
 
 <div class="map" id="map"></div> 

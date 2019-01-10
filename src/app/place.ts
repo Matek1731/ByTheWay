@@ -3,4 +3,5 @@ export class Place {
     name: string;
     lng: number;
     lat: number;
+    description: string;
   }
