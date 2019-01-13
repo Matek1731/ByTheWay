@@ -3,8 +3,11 @@ import { PLACES } from '../list-of-places';
 import { Place } from '../place';
 import * as mapboxgl from 'mapbox-gl';
 import * as MapboxDraw from 'mapbox-gl-draw';
+import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+
 import { MapService } from '../services/map.service';
 import { GeoJson, FeatureCollection } from './map';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -39,7 +42,6 @@ export class MapComponent implements OnInit {
   }
 
   private initializeMap() {
-    console.log("initializing map kurła");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
@@ -50,16 +52,42 @@ export class MapComponent implements OnInit {
       });
     }
 
-   this.buildMap();
+    this.buildMap();
 
   }
 
   draw = new MapboxDraw({
     displayControlsDefault: false
-});
+  });
+
+  directions = new MapboxDirections({
+    accessToken: environment.mapbox.accessToken,
+    unit: 'metric',
+    profile: 'mapbox/walking',
+    interactive: false,
+    controls: {
+      inputs: false,
+      instructions: false,
+      profileSwitcher: false
+    }
+  });
+
+  
+
+navigateToPlace(place: Place){
+  this.directions.setOrigin([this.lng, this.lat]);
+  this.directions.setDestination([place.lng, place.lat]);
+}
+
+navigateToPlaceFromPopup(){
+    this.navigateToPlace(this.selectedPlace);
+    // this.selectedPlace = null;
+}
+
+
+
 
 buildMap() {
-  console.log("building map kurła");
   this.map = new mapboxgl.Map({
     container: 'map',
     style: this.style,
@@ -67,16 +95,12 @@ buildMap() {
     center: [this.lng, this.lat]
   });
 
-  
 
   this.map.addControl(new mapboxgl.NavigationControl());
-  this.map.addControl(this.draw); 
+  this.map.addControl(this.draw);
+  this.map.addControl(this.directions, 'top-left');
   this.map.on('load', function() {
-      console.log("KURŁA tej");
-      console.log(this);
-      console.log(PLACES)
       for (let place of PLACES) {
-        console.log(place);
         this._controls[3].add({
           type: 'Feature',
             geometry: {
@@ -85,7 +109,7 @@ buildMap() {
             },
             properties: {
               icon: {
-                iconUrl: '/mapbox.js/assets/images/astronaut1.png',
+                iconUrl: '../../assets/home.png',
                 iconSize: [100, 100], // size of the icon
                 iconAnchor: [50, 50], // point of the icon which will correspond to marker's location
                 popupAnchor: [0, -50], // point from which the popup should open relative to the iconAnchor
@@ -100,10 +124,9 @@ buildMap() {
 
   this.map.on('click', (event) => {
     const coordinates = [event.lngLat.lng, event.lngLat.lat];
-    console.log("clicked kurła " , coordinates)
+    console.log("clicked " , coordinates)
     for (let place of PLACES) {
       if (Math.abs(coordinates[0] - place.lng) < 0.0025 && Math.abs(coordinates[1] - place.lat) < 0.0025){
-        console.log(place);
         this.onSelect(place);
       }
     }
