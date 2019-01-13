@@ -15,6 +15,7 @@ export class MapComponent implements OnInit {
 
   places = PLACES;  // nasza wspaniala baza danych z pliku list-of-places XD
   selectedPlace: Place; // wybrane miejsce, dla ktorego bedzie wyswietlal sie pop-up
+  ListaMiejsc: Place[] = [];
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/outdoors-v9';
@@ -25,6 +26,7 @@ export class MapComponent implements OnInit {
   source: any;
   markers: any;
   
+  name: string;
 
   constructor(private mapservice: MapService) {
   }
@@ -128,4 +130,28 @@ flyTo(data: GeoJson) {
   onClosed($closed: boolean) {
     this.selectedPlace = null;
   }
+  
+    
+  Goto(nazwa: string) {
+
+    let item = PLACES.find(i => i.name === nazwa);
+    let itemLng = item.lng
+    let itemLat = item.lat
+    this.map.flyTo({
+      center: [itemLng, itemLat],
+      zoom: 16
+    });
+  }
+
+  onSearchChange(e) {
+    this.Goto(e.target.value);
+ }
+
+ addToList(nazwa:string) {
+  let item = PLACES.find(i => i.name === nazwa);
+  this.ListaMiejsc.push(item);
+  console.log('Dodano do wycieczki kurła');
+  console.log(this.ListaMiejsc);
+ }
+  
 }

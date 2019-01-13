@@ -9,6 +9,26 @@
 </div> -->
 
 <!-- pop-up miejsca -->
+
+
+<div class="search">
+ <!-- <input type="text" [(ngModel)]="name" (input)="Search()" /> -->
+  <div class="searchBlock">
+  <input id="inputSearch" list="searchList" placeholder="Szukaj..." (change)="onSearchChange($event)" #clear name="filterName">
+  <button (click) = "clear.value = ''">X</button>
+  <button (click) = "addToList(clear.value)">+</button>
+  </div>
+	<datalist id="searchList">
+    <div *ngFor = 'let o of places'>
+    <option value="{{o.name}}">
+    </div>
+  </datalist>
+
+
+</div>
+
+
+
 <div *ngIf="selectedPlace">
   <app-place-pop-up [selectedPlace]="selectedPlace" (closed)="onClosed($event)"></app-place-pop-up>
 </div>
