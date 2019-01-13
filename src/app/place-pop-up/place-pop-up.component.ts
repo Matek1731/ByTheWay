@@ -16,6 +16,7 @@ let baseURL = environment.baseURL;
 export class PlacePopUpComponent implements OnInit {
   @Input() selectedPlace: Place;
   @Output() closed = new EventEmitter<boolean>();
+  shortDescription: string;
   
 
   constructor(
@@ -23,7 +24,10 @@ export class PlacePopUpComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    console.log(this.show)
+    this.shortDescription = this.selectedPlace.description.substring(0, 250)
+    if (this.selectedPlace.description.length > 250){
+      this.shortDescription = this.shortDescription + "...";
+    }
   }
 
   private show: boolean = true;
@@ -35,7 +39,11 @@ export class PlacePopUpComponent implements OnInit {
   }
 
   public goto(): void {
-    this.router.navigate([baseURL + "place/" + this.selectedPlace.id]);
+    this.router.navigate(["place/" + this.selectedPlace.id]);
+  }
+
+  public goto_photo(): void {
+    this.router.navigate(["place/photo/" + this.selectedPlace.id]);
   }
 
 }

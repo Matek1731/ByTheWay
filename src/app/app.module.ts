@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
+// import { SearchBarComponent } from './search-bar/search-bar.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PlacePopUpComponent } from './place-pop-up/place-pop-up.component';
@@ -16,12 +16,14 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { PlaceComponent } from './place/place.component';
+import { PlacePhotoComponent } from './place-photo/place-photo.component';
 
 
 
 const appRoutes: Routes = [
   { path: '', component: MainScreenComponent  },
-  { path: 'place/:id', component: PlaceComponent },
+  { path: 'place/:id', component: PlaceComponent, pathMatch: 'full' },
+  { path: 'place/photo/:id', component: PlacePhotoComponent}
 ];
 
 
@@ -30,16 +32,14 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MapComponent,
-    SearchBarComponent,
     MainScreenComponent,
     PlaceComponent,
-    PlacePopUpComponent],
+    PlacePopUpComponent,
+    PlacePhotoComponent],
   entryComponents: [],
   bootstrap: [AppComponent],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-    ),
+    RouterModule.forRoot(appRoutes),
     NgbModule,
     BrowserModule,
     AppRoutingModule,

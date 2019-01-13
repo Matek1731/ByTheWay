@@ -1,6 +1,10 @@
-<div>
-  place works!
-  Kurła ale kiedyś było.
-  Ale kurła zabytek
-  Kurła 
+<div class="container">
+  <div class="place-name">
+    {{place.name}}
+  </div>
+  <div class="place-photo">
+    <img [src] = "place.imgSrc" width="80%" (click) = "goto_photo()">
+  </div>
+  <div class = "place-description">{{place.description}}</div>
 </div>
+<button class="back_button" (click) = "goBack()">Cofnij</button>

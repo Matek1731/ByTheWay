@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MainScreenComponent } from './main-screen/main-screen.component';
+import { PlaceComponent } from './place/place.component';
 
-const routes: Routes = [];
+
+const routes: Routes = [
+  { path: '', component: MainScreenComponent, pathMatch: 'full' },
+  { path: 'place/:id', component: PlaceComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
