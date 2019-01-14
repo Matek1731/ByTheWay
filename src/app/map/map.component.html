@@ -12,17 +12,29 @@
 
 
 <div class="search">
- <!-- <input type="text" [(ngModel)]="name" (input)="Search()" /> -->
   <div class="searchBlock">
   <input id="inputSearch" list="searchList" placeholder="Szukaj..." (change)="onSearchChange($event)" #clear name="filterName">
-  <button (click) = "clear.value = ''">X</button>
-  <button (click) = "addToList(clear.value)">+</button>
+  <button class="btn" (click) = "clear.value = ''"><i class="fa fa-close"></i></button>
+  <button class="btn" (click) = "addToList(clear.value)"><i class="fa fa-plus-circle"></i></button>
   </div>
 	<datalist id="searchList">
     <div *ngFor = 'let o of places'>
     <option value="{{o.name}}">
     </div>
   </datalist>
+</div>
+
+<div id="demo">
+  <div class="wrapper">
+      <div class="content">
+          <ul>
+            <div *ngFor = 'let o of ListaMiejsc'>
+              <a href="#"><li>{{o.name}}<button class="btn2" (click) = "navigateToPlace(o)"><i class="fa fa-road"></i></button></li></a>
+            </div>
+          </ul>
+      </div>
+      <div class="parent">Plan wycieczki</div>
+  </div>
 </div>
 
 

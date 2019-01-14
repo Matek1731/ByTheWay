@@ -170,11 +170,12 @@ flyTo(data: GeoJson) {
     this.Goto(e.target.value);
  }
 
- addToList(nazwa:string) {
+  addToList(nazwa: string) {
   let item = PLACES.find(i => i.name === nazwa);
-  this.ListaMiejsc.push(item);
-  console.log('Dodano do wycieczki kurła');
-  console.log(this.ListaMiejsc);
+  if (this.ListaMiejsc.some(e => e.id === item.id)) {
+  } else {
+    this.ListaMiejsc.push(item);
+  }
  }
-  
+
 }
