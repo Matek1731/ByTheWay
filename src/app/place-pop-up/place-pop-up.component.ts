@@ -17,6 +17,7 @@ export class PlacePopUpComponent implements OnInit {
   @Input() selectedPlace: Place;
   @Output() closed = new EventEmitter<boolean>();
   @Output() navigated = new EventEmitter<boolean>();
+  @Output() added = new EventEmitter<boolean>();
   shortDescription: string;
   
 
@@ -42,6 +43,11 @@ export class PlacePopUpComponent implements OnInit {
   public navigate(): void {
     // this.show = false;
     this.navigated.emit(true);
+  }
+
+  public add(): void {
+    // this.show = false;
+    this.added.emit(true);
   }
 
   public goto(): void {

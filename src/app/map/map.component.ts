@@ -170,6 +170,10 @@ flyTo(data: GeoJson) {
     this.Goto(e.target.value);
  }
 
+ addToListFromPopup($event){
+  this.addToList(this.selectedPlace.name);
+ }
+
   addToList(nazwa: string) {
   let item = PLACES.find(i => i.name === nazwa);
   if (this.ListaMiejsc.some(e => e.id === item.id)) {

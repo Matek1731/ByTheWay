@@ -40,7 +40,7 @@
 
 
 <div *ngIf="selectedPlace">
-  <app-place-pop-up class="popup" [selectedPlace]="selectedPlace" (closed)="onClosed($event)" (navigated)="navigateToPlaceFromPopup($event)"></app-place-pop-up>
+  <app-place-pop-up class="popup" [selectedPlace]="selectedPlace" (closed)="onClosed($event)" (navigated)="navigateToPlaceFromPopup($event)" (added)="addToListFromPopup($event)"></app-place-pop-up>
 </div>
 
 <!-- <input type="text" [(ngModel)]="message" placeholder="your message..."> -->
